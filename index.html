@@ -1,0 +1,138 @@
+<html>
+
+
+<!-- <meta http-equiv="refresh" content="5"/>-->
+
+<style>
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+<body onclick="openInNewTab('https://google.com')">
+
+<div>Es hora del curso: <br>
+  <span id="course_title">{{ curso_value }}</span>
+</div>
+
+<script>
+  // lw means "Life with Whole Group".
+  // lg means "Life with Group".
+  //
+  let schedules = [
+    {
+      // Simulating this is wednesday.
+      "day": "thursday",
+      "details": [
+        {
+          "title": "Permanents and Mindfulness",
+          "start_hour": "00:00",
+          "end_hour": "01:00",
+          "type_hour": "am",
+          "group": ["a", "b"],
+          "class_type": "lw",
+          // @TODO: Update this link.
+          "uri": "https://example.com",
+          // @TODO: Here goes a course image uri.
+          // "image_uri": "https://example.com/image.png"
+        },
+        {
+          "title": "Physical Education",
+          "start_hour": "8:00",
+          "end_hour": "8:30",
+          "type_hour": "am",
+          "group": ["a", "b"],
+          // @TODO: Update this link.
+          "uri": "https://example.com",
+          "class_type": "lw",
+          // @TODO: Here goes a course image uri.
+          // "image_uri": "https://example.com/image.png"
+        },
+        {
+          "title": "Break",
+          "start_hour": "9:00",
+          "end_hour": "9:15",
+          "type_hour": "am",
+          "group": ["a", "b"],
+          "uri": "",
+          "class_type": "lw",
+          // @TODO: Here goes a course image uri.
+          // "image_uri": "https://example.com/image.png"
+        },
+        {
+          "title": "Art",
+          "start_hour": "9:15",
+          "end_hour": "10:00",
+          "type_hour": "am",
+          "group": ["a"],
+          "uri": "https://example.com",
+          "class_type": "lg",
+          // @TODO: Here goes a course image uri.
+          // "image_uri": "https://example.com/image.png"
+        },
+        {
+          "title": "Art",
+          "start_hour": "9:15",
+          "end_hour": "10:00",
+          "type_hour": "am",
+          "group": ["b"],
+          "uri": "https://example.com",
+          "class_type": "lg",
+          // @TODO: Here goes a course image uri.
+          // "image_uri": "https://example.com/image.png"
+        }
+      ]
+    }
+  ];
+
+  console.log(schedules);
+  let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+  let d = new Date();
+  let hour = d.getHours();
+  let minutes = d.getMinutes();
+  let string_current_hour_minutes = `${hour}:${minutes}`;
+  let int_current_hour_minutes = parseInt(`${hour}${minutes}`);
+  console.log('int_current_hour_minutes: ');
+  console.log(int_current_hour_minutes);
+  console.log('string_current_hour_minutes: ');
+  console.log(string_current_hour_minutes);
+  let day_name = days[d.getDay()];
+  console.log(day_name);
+
+  // @TODO: Add defensive programming.
+  let day_details = schedules.filter(s => s.day === day_name)[0].details;
+  console.log(day_details);
+  let course_arr = day_details.filter(
+    c => int_current_hour_minutes >= parseInt(c.start_hour.replace(":", ""))  &&
+      int_current_hour_minutes <= parseInt(c.end_hour.replace(":", ""))
+  );
+  // @TODO: Add defensive programming.
+  if (course_arr[0]) {
+    let course = course_arr[0];
+    console.log("Course found:");
+    console.log(course.title);
+    document.getElementById("course_title").innerHTML = course.title;
+    //course_title_el.innerHTML = "hel";
+  }
+  else {
+    console.log("No ha iniciado el curso");
+  }
+
+
+  function openInNewTab(url) {
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+</script>
+
+</body>
+
+
+
+
+
+</html>
+
