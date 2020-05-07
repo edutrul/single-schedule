@@ -9,20 +9,50 @@
     src: url(minecraft-font.ttf);
   }
   body {
+    cursor: pointer;
+    color: white;
     font-family: minecraft;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: calc(4em + 1vw);
-
+    background-image: url("minecraft_library.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .headline {
+    position: relative;
+    padding: 10%;
+    z-index: 1;
+  }
+  .rectangle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    background-color: black;
+    opacity: 0.6;
+  }
+  p {
+    margin: 0%;
+  }
+  #course_title {
+    margin: 4% 0% 0% 0%;
+    opacity: 1;
   }
 </style>
 
 <body onclick="openInNewTab('https://google.com')">
 
-<div>Es hora del curso: <br>
-  <span id="course_title">{{ curso_value }}</span>
+<div class="headline"><p id="headline">Es hora del curso: </p><br>
+  <div class="rectangle"></div>
+  <p id="course_title">{{ curso_value }}</p>
 </div>
 
 <script>
@@ -37,7 +67,7 @@
         {
           "title": "Permanents and Mindfulness",
           "start_hour": "00:00",
-          "end_hour": "01:00",
+          "end_hour": "00:30",
           "type_hour": "am",
           "group": ["a", "b"],
           "class_type": "lw",
@@ -99,7 +129,14 @@
   let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
   let d = new Date();
   let hour = d.getHours();
+  console.log("hour");
+  console.log(hour);
   let minutes = d.getMinutes();
+  console.log("minutes");
+  console.log(minutes);
+  let seconds = d.getSeconds();
+  console.log("seconds");
+  console.log(seconds);
   let string_current_hour_minutes = `${hour}:${minutes}`;
   let int_current_hour_minutes = parseInt(`${hour}${minutes}`);
   console.log('int_current_hour_minutes: ');
@@ -112,6 +149,7 @@
   // @TODO: Add defensive programming.
   let day_details = schedules.filter(s => s.day === day_name)[0].details;
   console.log(day_details);
+  // @TODO: Fix time issue to conver to timezone. Think twice.
   let course_arr = day_details.filter(
     c => int_current_hour_minutes >= parseInt(c.start_hour.replace(":", ""))  &&
       int_current_hour_minutes <= parseInt(c.end_hour.replace(":", ""))
@@ -122,9 +160,15 @@
     console.log("Course found:");
     console.log(course.title);
     document.getElementById("course_title").innerHTML = course.title;
+    // @TODO: Update programmatically image uri based on the course.
+    // var div = document.getElementById("div1");
+    // div.style.marginTop = ".25in";
     //course_title_el.innerHTML = "hel";
   }
   else {
+    document.getElementById("headline").innerHTML = "GAME OVER";
+    document.getElementById("course_title").innerHTML = "No ha iniciado el curso AUN";
+    document.body.style.backgroundImage = "url('minecraft_game_over.jpg')";
     console.log("No ha iniciado el curso");
   }
 
