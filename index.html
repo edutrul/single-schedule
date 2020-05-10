@@ -62,17 +62,17 @@
   let schedules = [
     {
       // Simulating this is wednesday.
-      "day": "thursday",
+      "day": "sunday",
       "details": [
         {
           "title": "Permanents and Mindfulness",
-          "start_hour": "00:00",
-          "end_hour": "00:30",
+          "start_hour": "11:00",
+          "end_hour": "11:30",
           "type_hour": "am",
           "group": ["a", "b"],
           "class_type": "lw",
           // @TODO: Update this link.
-          "uri": "https://example.com",
+          "uri": "https://meet.google.com/zic-atxk-omn?hs=122&authuser=2,",
           // @TODO: Here goes a course image uri.
           // "image_uri": "https://example.com/image.png"
         },
@@ -83,7 +83,7 @@
           "type_hour": "am",
           "group": ["a", "b"],
           // @TODO: Update this link.
-          "uri": "https://example.com",
+          "uri": "https://meet.google.com/zic-atxk-omn",
           "class_type": "lw",
           // @TODO: Here goes a course image uri.
           // "image_uri": "https://example.com/image.png"
@@ -128,15 +128,14 @@
   console.log(schedules);
   let days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
   let d = new Date();
+  console.log("new Date()");
+  console.log(d);
   let hour = d.getHours();
   console.log("hour");
   console.log(hour);
-  let minutes = d.getMinutes();
+  let minutes = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
   console.log("minutes");
   console.log(minutes);
-  let seconds = d.getSeconds();
-  console.log("seconds");
-  console.log(seconds);
   let string_current_hour_minutes = `${hour}:${minutes}`;
   let int_current_hour_minutes = parseInt(`${hour}${minutes}`);
   console.log('int_current_hour_minutes: ');
@@ -149,7 +148,6 @@
   // @TODO: Add defensive programming.
   let day_details = schedules.filter(s => s.day === day_name)[0].details;
   console.log(day_details);
-  // @TODO: Fix time issue to conver to timezone. Think twice.
   let course_arr = day_details.filter(
     c => int_current_hour_minutes >= parseInt(c.start_hour.replace(":", ""))  &&
       int_current_hour_minutes <= parseInt(c.end_hour.replace(":", ""))
