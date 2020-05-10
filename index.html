@@ -48,7 +48,7 @@
   }
 </style>
 
-<body onclick="openInNewTab('https://google.com')">
+<body>
 
 <div class="headline"><p id="headline">Es hora del curso: </p><br>
   <div class="rectangle"></div>
@@ -62,7 +62,7 @@
   let schedules = [
     {
       // Simulating this is wednesday.
-      "day": "sunday",
+      "day": "monday",
       "details": [
         {
           "title": "Permanents and Mindfulness",
@@ -96,30 +96,60 @@
           "group": ["a", "b"],
           "uri": "",
           "class_type": "lw",
-          // @TODO: Here goes a course image uri.
-          // "image_uri": "https://example.com/image.png"
         },
         {
-          "title": "Art",
+          "title": "Arte",
           "start_hour": "9:15",
+          "end_hour": "9:35",
+          "type_hour": "am",
+          "group": ["a"],
+          "uri": "https://meet.google.com/apk-zpoc-grg",
+          "class_type": "lg",
+        },
+        {
+          "title": "Tutoría",
+          "start_hour": "9:40",
           "end_hour": "10:00",
           "type_hour": "am",
           "group": ["a"],
-          "uri": "https://example.com",
+          "uri": "https://meet.google.com/apk-zpoc-grg",
           "class_type": "lg",
-          // @TODO: Here goes a course image uri.
-          // "image_uri": "https://example.com/image.png"
         },
         {
-          "title": "Art",
+          "title": "Arte",
           "start_hour": "9:15",
+          "end_hour": "9:35",
+          "type_hour": "am",
+          "group": ["b"],
+          "uri": "https://meet.google.com/apk-zpoc-grg",
+          "class_type": "lg",
+        },
+        {
+          "title": "Tutoría",
+          "start_hour": "9:40",
           "end_hour": "10:00",
           "type_hour": "am",
           "group": ["b"],
-          "uri": "https://example.com",
+          "uri": "https://meet.google.com/apk-zpoc-grg",
           "class_type": "lg",
-          // @TODO: Here goes a course image uri.
-          // "image_uri": "https://example.com/image.png"
+        },
+        {
+          "title": "Math",
+          "start_hour": "10:00",
+          "end_hour": "10:45",
+          "type_hour": "am",
+          "group": ["a"],
+          "uri": "https://meet.google.com/apk-zpoc-grg",
+          "class_type": "lg",
+        },
+        {
+          "title": "Math",
+          "start_hour": "10:00",
+          "end_hour": "10:45",
+          "type_hour": "am",
+          "group": ["b"],
+          "uri": "https://meet.google.com/apk-zpoc-grg",
+          "class_type": "lg",
         }
       ]
     }
@@ -155,6 +185,10 @@
   // @TODO: Add defensive programming.
   if (course_arr[0]) {
     let course = course_arr[0];
+    console.log('course');
+    console.log(course);
+    document.body.onclick = () => window.open(course.uri, '_blank').focus();
+    //let meeting_uri = course.uri;
     console.log("Course found:");
     console.log(course.title);
     document.getElementById("course_title").innerHTML = course.title;
